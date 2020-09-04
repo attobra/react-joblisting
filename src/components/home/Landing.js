@@ -4,6 +4,7 @@ import Footer from '../layout/Footer'
 import SearchForm from './SearchForm'
 import JobsContainer from './JobsContainer'
 
+
 export default class LandingPage extends Component {
     render() {
         return (
@@ -12,7 +13,6 @@ export default class LandingPage extends Component {
                 <SearchForm />
                 <JobsContainer />
                 <Footer />
-                
             </div>
         )
     }

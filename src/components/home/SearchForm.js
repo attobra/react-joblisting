@@ -33,9 +33,9 @@ export class SearchForm extends Component {
                     </div>
                 </div>
                 <div className="col-lg-3 col-md-12">
-                    {/* <div className="job_btn">
+                    <div className="job_btn">
                         <a href="#" className="boxed-btn3">Find Job</a>
-                    </div> */}
+                    </div>
                 </div>
             </div>
         </div>
