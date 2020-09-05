@@ -1,8 +1,20 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+import {fetchJob, setLoading} from '../../actions/searchActions'
+import Spinner from '../layout/Spinner'
 
 export class Job extends Component {
+    componentDidMount(){
+        this.props.fetchJob(this.props.match.params.id)
+        this.props.setLoading()
+    }
+
+
     render() {
-        return (
+        const {loading, job} = this.props
+        let jobInfo = (
             <div>
     
     <div className="bradcam_area bradcam_bg_1">
@@ -10,10 +22,18 @@ export class Job extends Component {
             <div className="row">
                 <div className="col-xl-12">
                     <div className="bradcam_text">
-                        <h3>Software Engineer</h3>
+                        <h3>{job.title}</h3>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    
+    <div className="row">
+        <div className="col-md-12">
+            <Link to='/' className="submit_btn">
+                <button className="boxed-btn3 w-100" type="submit">Go Back to Search</button>
+            </Link>
         </div>
     </div>
     
@@ -25,65 +45,45 @@ export class Job extends Component {
                         <div className="single_jobs white-bg d-flex justify-content-between">
                             <div className="jobs_left d-flex align-items-center">
                                 <div className="thumb">
-                                    <img src="img/svg_icon/1.svg" alt=""/>
+                                    <img src={job.company_logo} alt=""/>
                                 </div>
                                 <div className="jobs_conetent">
-                                    <a href="#"><h4>Software Engineer</h4></a>
+                                    <a 
+                                    href={job.company_url}
+                                    ><h4>{job.title}</h4></a>
                                     <div className="links_locat d-flex align-items-center">
-                                        <div class="location">
-                                            <p> <i className="fa fa-map-marker"></i> California, USA</p>
+                                        <div className="location">
+                                            <p> <i className="fa fa-map-marker"></i> {job.location}</p>
                                         </div>
                                         <div className="location">
-                                            <p> <i className="fa fa-clock-o"></i> Part-time</p>
+                                            <p> <i className="fa fa-clock-o"></i> {job.type}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="jobs_right">
-                                <div className="apply_now">
-                                    <a className="heart_mark" href="#"> <i className="ti-heart"></i> </a>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                     <div className="descript_wrap white-bg">
                         <div className="single_wrap">
                             <h4>Job description</h4>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing.</p>
-                            <p>Variations of passages of lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing.</p>
+                            {job.description}
                         </div>
-                        <div className="single_wrap">
-                            <h4>Responsibility</h4>
-                            <ul>
-                                <li>The applicants should have experience in the following areas.
-                                </li>
-                                <li>Have sound knowledge of commercial activities.</li>
-                                <li>Leadership, analytical, and problem-solving abilities.</li>
-                                <li>Should have vast knowledge in IAS/ IFRS, Company Act, Income Tax, VAT.</li>
-                            </ul>
-                        </div>
-                        <div className="single_wrap">
-                            <h4>Qualifications</h4>
-                            <ul>
-                                <li>The applicants should have experience in the following areas.
-                                </li>
-                                <li>Have sound knowledge of commercial activities.</li>
-                                <li>Leadership, analytical, and problem-solving abilities.</li>
-                                <li>Should have vast knowledge in IAS/ IFRS, Company Act, Income Tax, VAT.</li>
-                            </ul>
-                        </div>
-                        <div className="single_wrap">
-                            <h4>Benefits</h4>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing.</p>
-                        </div>
+                        
                     </div>
                     <div className="apply_job_form white-bg">
                         <h4>Apply for the job</h4>
+                        {job.how_to_apply}
                         <form action="#">
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="submit_btn">
-                                        <button className="boxed-btn3 w-100" type="submit">Apply Now</button>
+                                        <a
+                                        href={job.company_url}
+                                        className="boxed-btn3 w-100" 
+                                        >
+                                        Apply Now
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -97,11 +97,11 @@ export class Job extends Component {
                         </div>
                         <div className="job_content">
                             <ul>
-                                <li>Published on: <span>12 Nov, 2019</span></li>
-                                <li>Vacancy: <span>2 Position</span></li>
-                                <li>Salary: <span>50k - 120k/y</span></li>
-                                <li>Location: <span>California, USA</span></li>
-                                <li>Job Nature: <span> Full-time</span></li>
+                                <li>Published on: <span>{job.created_at}</span></li>
+                                <li>Company: <span>{job.company}</span></li>
+                                
+                                <li>Location: <span>{job.location}</span></li>
+                                <li>Job Nature: <span>{job.type} </span></li>
                             </ul>
                         </div>
                     </div>
@@ -113,8 +113,17 @@ export class Job extends Component {
     </div>
 
             </div>
+
         )
+        let content = loading ? <Spinner /> : jobInfo;
+
+        return <div> {content}</div>
     }
 }
 
-export default Job
+const mapStateToProps = state =>({
+    loading: state.jobs.loading,
+    job: state.jobs.job
+})
+
+export default connect (mapStateToProps, {fetchJob, setLoading})(Job)

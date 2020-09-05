@@ -1,8 +1,21 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
+
 import JobCard from './JobCard'
 
 export class JobsContainer extends Component {
     render() {
+
+        const {jobs} = this.props
+        let content=''
+
+        content = jobs.Response == 'True'
+        ? jobs.Search.map((job, index) => <JobCard key={index} job={job} />)
+        : null
+
+        //shows undefined as jobs.Response
+        // console.log(jobs.Response)
+
         return (
         <div className="job_listing_area">
         <div className="container">
@@ -12,19 +25,16 @@ export class JobsContainer extends Component {
                         <h3>Job Listing</h3>
                     </div>
                 </div>
-                <div className="col-lg-6">
+                {/* <div className="col-lg-6">
                     <div className="brouse_job text-right">
                         <a href="jobs.html" className="boxed-btn4">Browse More Job</a>
                     </div>
-                </div>
+                </div> */}
             </div>
             <div className="job_lists">
                 <div className="row">
-                     <JobCard />
-                     <JobCard />
-                     <JobCard />
+                     {content}
     
-                
                 </div>
             </div>
         </div>
@@ -33,4 +43,8 @@ export class JobsContainer extends Component {
     }
 }
 
-export default JobsContainer
+const mapStateToProps = state => ({
+    jobs: state.jobs.jobs
+})
+
+export default connect(mapStateToProps)(JobsContainer)

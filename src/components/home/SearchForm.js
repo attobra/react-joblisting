@@ -1,43 +1,64 @@
 import React, { Component } from 'react'
 
+import {connect} from 'react-redux'
+
+import {searchJob, fetchJobs, setLoading} from '../../actions/searchActions'
+
 export class SearchForm extends Component {
+    onChange = e => {
+        this.props.searchJob(e.target.value)
+    }
+
+    onSubmit = e => {
+      e.preventDefault();
+      this.props.fetchJobs(this.props.text);
+      this.props.setLoading()
+      console.log(this.props.fetchJobs(this.props.text))
+    }
+
     render() {
         return (
             <div>
     <div className="catagory_area">
         <div className="container">
+        {/* form added */}
+            <form
+            
+            onSubmit={this.onSubmit}
+            >
             <div className="row cat_search">
                 <div className="col-lg-3 col-md-4">
                     <div className="single_input">
-                        <input type="text" placeholder="Search keyword" />
+                        <input 
+                        type="text" 
+                        placeholder="Search keyword"
+                        onChange={this.onChange} />
                     </div>
                 </div>
                 <div className="col-lg-3 col-md-4">
                     <div className="single_input">
-                        <select className="wide" >
-                            <option data-display="Location">Location</option>
-                            <option value="1">United States</option>
-                            <option value="2">Canada</option>
-                            <option value="4">India</option>
-                          </select>
+                    {/* <input type="text" placeholder="Location" /> */}
+                        
                     </div>
                 </div>
                 <div className="col-lg-3 col-md-4">
                     <div className="single_input">
-                        <select className="wide">
-                            <option data-display="Category">Category</option>
-                            <option value="1">Category 1</option>
-                            <option value="2">Category 2</option>
-                            <option value="4">Category 3</option>
-                          </select>
+                    {/* <input type="text" placeholder="category" /> */}
+                        
                     </div>
                 </div>
                 <div className="col-lg-3 col-md-12">
                     <div className="job_btn">
-                        <a href="#" className="boxed-btn3">Find Job</a>
+                        <button 
+                        type="submit" 
+                        className="boxed-btn3"
+                        >
+                        Find Job</button>
                     </div>
                 </div>
+                
             </div>
+            </form>
         </div>
     </div>
             </div>
@@ -45,4 +66,8 @@ export class SearchForm extends Component {
     }
 }
 
-export default SearchForm
+const mapStateToProps = state => ({
+    text: state.jobs.text
+})
+
+export default connect(mapStateToProps, {searchJob, fetchJobs, setLoading})(SearchForm)

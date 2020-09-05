@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom'
 
 
 export default class Header extends Component {
@@ -13,9 +14,9 @@ export default class Header extends Component {
                             <div className="row align-items-center">
                                 <div className="col-xl-3 col-lg-2">
                                     <div className="logo">
-                                        <a href="index.html">
+                                        <Link to="/">
                                             <img src="img/logo.png" alt="logo"/>
-                                        </a>
+                                        </Link>
                                         
                                     </div>
                                 </div>

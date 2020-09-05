@@ -1,19 +1,25 @@
 import React, { Component } from 'react'
-import Header from '../layout/Header'
-import Footer from '../layout/Footer'
+import {connect} from 'react-redux'
+
 import SearchForm from './SearchForm'
 import JobsContainer from './JobsContainer'
+import Spinner from '../layout/Spinner'
 
 
-export default class LandingPage extends Component {
+export class Landing extends Component {
     render() {
+        const {loading} = this.props
         return (
             <div>
-                <Header />
                 <SearchForm />
-                <JobsContainer />
-                <Footer />
+                {loading ? <Spinner /> : <JobsContainer />}
             </div>
         )
     }
 }
+
+const mapStateToProps = state => ({
+    loading: state.jobs.loading
+})
+
+export default connect(mapStateToProps)(Landing)
