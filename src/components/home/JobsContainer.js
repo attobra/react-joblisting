@@ -9,8 +9,8 @@ export class JobsContainer extends Component {
         const {jobs} = this.props
         let content=''
 
-        content = jobs.Response == 'True'
-        ? jobs.Search.map((job, index) => <JobCard key={index} job={job} />)
+        content = jobs.length > 0
+        ? jobs.map((job, index) => <JobCard key={index} job={job} />)
         : null
 
         //shows undefined as jobs.Response

@@ -9,7 +9,7 @@ export class JobCard extends Component {
                         <div className="single_jobs white-bg d-flex justify-content-between">
                             <div className="jobs_left d-flex align-items-center">
                                 <div className="thumb">
-                                    <img src={job.company_logo} alt="company logo" />
+                                    <img className="company-logo" src={job.company_logo} alt="company logo" />
                                 </div>
                                 <div className="jobs_conetent">
                                     <Link to={'/job/' + job.id}><h4>{job.title}</h4></Link>

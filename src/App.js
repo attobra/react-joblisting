@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Provider} from 'react-redux'
 import {HashRouter as Router, Route} from 'react-router-dom'
+import './app.css'
 
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
