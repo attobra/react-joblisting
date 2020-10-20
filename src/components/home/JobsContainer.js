@@ -43,6 +43,7 @@ export class JobsContainer extends Component {
     }
 }
 
+
 const mapStateToProps = state => ({
     jobs: state.jobs.jobs
 })

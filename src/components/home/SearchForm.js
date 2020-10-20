@@ -36,16 +36,23 @@ export class SearchForm extends Component {
                     </div>
                 </div>
                 <div className="col-lg-3 col-md-4">
-                    <div className="single_input">
-                    {/* <input type="text" placeholder="Location" /> */}
+                    {/* <div className="single_input">
+                    <input 
+                    type="text" 
+                    placeholder="Location"
+                    onChange={this.onChange} />
                         
-                    </div>
+                    </div> */}
                 </div>
                 <div className="col-lg-3 col-md-4">
-                    <div className="single_input">
-                    {/* <input type="text" placeholder="category" /> */}
+                    {/* <div className="single_input">
+                    <input 
+                    type="checkbox" 
+                    label = "full time only"
+                    onChange={this.onChange}
+                    />
                         
-                    </div>
+                    </div> */}
                 </div>
                 <div className="col-lg-3 col-md-12">
                     <div className="job_btn">
