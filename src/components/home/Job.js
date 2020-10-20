@@ -77,12 +77,16 @@ export class Job extends Component {
                 <div className="descript_wrap white-bg">
                   <div className="single_wrap">
                     <h4>Job description</h4>
-                    {job.description}
+                    <div
+                      dangerouslySetInnerHTML={{ __html: job.description }}
+                    ></div>
                   </div>
                 </div>
                 <div className="apply_job_form white-bg">
                   <h4>Apply for the job</h4>
-                  {/* {job.how_to_apply} */}
+                  <div
+                    dangerouslySetInnerHTML={{ __html: job.how_to_apply }}
+                  ></div>
                   <form action="#">
                     <div className="row">
                       <div className="col-md-12">
