@@ -15,7 +15,7 @@ export class Job extends Component {
     const { loading, job } = this.props;
     let jobInfo = (
       <div>
-        <div className="bradcam_area bradcam_bg_1">
+        {/* <div className="bradcam_area bradcam_bg_1">
           <div className="container">
             <div className="row">
               <div className="col-xl-12">
@@ -25,12 +25,12 @@ export class Job extends Component {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="row">
           <div className="col-md-12">
             <Link to="/" className="submit_btn">
-              <button className="boxed-btn3 w-100" type="submit">
+              <button className="boxed-btn3 w-100 mt-2" type="submit">
                 Go Back to Search
               </button>
             </Link>
